@@ -18,17 +18,10 @@ const MovieGrid = ({ category, type }) => {
       console.log(data.results);
       setItems(data.results);
     });
-  }, []);
-  const BgImage = {
-    backgroundImage: `url(${posterImg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPostion: "center",
-    backgroundSize: "cover",
-  };
+  }, [category]);
 
   return (
     <div className="flex justify-center px-5 sm:px-20">
-      {/* <div className="flex flex-wrap"> */}
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {items.map((item, i) => (
           <MovieCard item={item} key={i} category={category} />
