@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const fetchFromApi = async (url) => {
+const fetchFromApi = async (url, page) => {
   const baseUrl = "https://api.themoviedb.org/3";
   const options = {
     method: "GET",
     params: {
       language: "en-US",
-      page: "1",
+      page: page ? 1 + page : 1,
     },
     headers: {
       accept: "application/json",

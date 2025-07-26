@@ -25,10 +25,10 @@
     animation: rotate 6s linear infinite;
   }
   .light {
-    @apply h-screen w-screen bg-white;
+    @apply w-screen h-screen bg-white;
   }
   .dark {
-    @apply w-screen bg-black text-white;
+    @apply w-screen text-white bg-black;
   }
   .hero::after {
     content: "";
@@ -48,7 +48,7 @@
     border: 4px solid #166534;
   }
   .volume::-webkit-slider-thumb {
-    @apply h-4 w-4 rounded-full bg-white;
+    @apply w-4 h-4 bg-white rounded-full;
   }
   @keyframes rotate {
     0% {

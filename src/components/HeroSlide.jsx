@@ -11,6 +11,7 @@ const HeroSlide = () => {
   // SwiperCore.use([Autoplay])
   const [movieItems, setMovieItems] = useState(MovieData);
   const [loading, setLoading] = useState(true);
+  const [trailer, settrailer] = useState(false);
 
   const { shuffle } = useContext(Context);
 
@@ -37,7 +38,9 @@ const HeroSlide = () => {
   // Auto-rotate slides every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide();
+      if (!trailer) {
+        nextSlide();
+      }
     }, 5000);
 
     return () => clearInterval(interval);
@@ -62,7 +65,7 @@ const HeroSlide = () => {
               {movieItems.map((movie, i) => {
                 return (
                   <div className="w-screen" key={i}>
-                    <HeroSlideItem movie={movie} />
+                    <HeroSlideItem movie={movie} setTrailer={settrailer} />
                   </div>
                 );
               })}

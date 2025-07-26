@@ -7,19 +7,21 @@ import fetchFromApi from "../api/fetchFromApi";
 import bannerImg from "../assets/bannerimg.jpg";
 
 const Modal = ({ src }) => {
-  return <ReactPlayer className="m-5 w-full" url={src} controls />;
+  return <ReactPlayer className="w-full m-5" url={src} controls />;
 };
 
-const HeroSlideItem = ({ movie }) => {
+const HeroSlideItem = ({ movie, setTrailer }) => {
   const [videoSrc, setVideoSrc] = useState(null);
 
   async function setModal() {
     if (videoSrc) {
       setVideoSrc(null);
+      setTrailer(false);
     } else {
       const videos = await fetchFromApi(`/movie/${movie.id}/videos`);
       if (videos.results.length > 0) {
         setVideoSrc(`https://www.youtube.com/watch?v=${videos.results[0].key}`);
+        setTrailer(true);
       } else {
         console.log("No Trailer");
       }
@@ -37,7 +39,7 @@ const HeroSlideItem = ({ movie }) => {
     <div className="h-[450px] w-screen sm:h-screen">
       <div style={BgStyle} className="hero h-[450px] w-full sm:h-screen">
         <div className="absolute top-0 h-[450px] w-screen bg-black/50 sm:h-screen"></div>
-        <div className="relative top-20 flex items-center justify-center gap-10 px-5 sm:px-32">
+        <div className="relative flex items-center justify-center gap-10 px-5 top-20 sm:px-32">
           <AnimatePresence>
             {videoSrc && (
               <motion.div
@@ -57,7 +59,7 @@ const HeroSlideItem = ({ movie }) => {
                 <Modal src={videoSrc} />
                 <p
                   onClick={setModal}
-                  className="absolute right-2 top-0 md:cursor-pointer"
+                  className="absolute top-0 right-2 md:cursor-pointer"
                 >
                   x
                 </p>
@@ -69,7 +71,16 @@ const HeroSlideItem = ({ movie }) => {
             <motion.h2
               initial={{ opacity: 0, y: -30 }}
               whileInView={{ opacity: 1, y: 0, transition: { duration: 1 } }}
-              className="mb-10 text-5xl font-bold sm:mb-5 sm:text-6xl"
+              className="mb-10 text-5xl font-bold sm:mb-5 sm:hidden sm:text-6xl"
+            >
+              {movie.title.length > 10
+                ? movie.title.slice(0, 10) + "..."
+                : movie.title}
+            </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0, transition: { duration: 1 } }}
+              className="hidden mb-10 text-5xl font-bold sm:mb-5 sm:block sm:text-6xl"
             >
               {movie.title}
             </motion.h2>
@@ -82,7 +93,9 @@ const HeroSlideItem = ({ movie }) => {
                 transition: { delay: 1, duration: 1 },
               }}
             >
-              {movie.overview}
+              {movie.overview.length > 200
+                ? movie.overview.slice(0, 200) + "..."
+                : movie.overview}
             </motion.p>
 
             <motion.div
@@ -92,10 +105,10 @@ const HeroSlideItem = ({ movie }) => {
                 y: 0,
                 transition: { delay: 2, duration: 1 },
               }}
-              className="mt-12 flex gap-5 sm:mt-5"
+              className="flex gap-5 mt-12 sm:mt-5"
             >
               <Button path={`/movie/${movie.id}`} content="Watch Now" />
-              <OutlineButton content="Watch Trailer" setModal={setModal} />
+              <OutlineButton content="Watch Trailer" func={setModal} />
             </motion.div>
           </div>
           <motion.img
