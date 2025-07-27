@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { Button, OutlineButton } from "./Button";
 import { apiConfig } from "../api/tmdbApi";
 import fetchFromApi from "../api/fetchFromApi";
-import bannerImg from "../assets/bannerimg.jpg";
 
 const Modal = ({ src }) => {
   return <ReactPlayer className="w-full m-5" url={src} controls />;

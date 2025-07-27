@@ -41,10 +41,10 @@ const HeroSlide = () => {
       if (!trailer) {
         nextSlide();
       }
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
-  }, [activeSlide]);
+  }, [activeSlide, trailer]);
 
   // Function to detect screen size
   let screenSize = `translateX(-${(activeSlide * 100) / 1}%)`;

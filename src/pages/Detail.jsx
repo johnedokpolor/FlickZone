@@ -4,6 +4,8 @@ import fetchFromApi from "../api/fetchFromApi";
 import { apiConfig } from "../api/tmdbApi";
 import ReactPlayer from "react-player";
 import MovieList from "../components/MovieList";
+import Spinner from "../components/Spinner";
+import { motion } from "motion/react";
 
 const Detail = () => {
   const { category, id } = useParams();
@@ -34,7 +36,7 @@ const Detail = () => {
 
   return (
     <div>
-      {item && (
+      {item ? (
         <>
           <div
             style={{
@@ -48,12 +50,19 @@ const Detail = () => {
             <div className="absolute top-0 h-[450px] w-screen bg-black/60"></div>
           </div>
           <div className="relative flex gap-10 px-5 -top-40 sm:-top-32 sm:px-40">
-            <img
+            <motion.img
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
               className="relative hidden w-[300px] rounded-xl lg:block"
               src={apiConfig.originalImage(item.poster_path)}
-              alt=""
+              alt="poster-image"
             />
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
               <h1 className="text-5xl font-bold">{item.title || item.name}</h1>
               <div className="flex gap-2 mt-5">
                 {item.genres &&
@@ -92,11 +101,11 @@ const Detail = () => {
                   ))}
                 </div>
               )}
-            </div>
+            </motion.div>
           </div>
           {trailers && (
             <div className="relative -top-40 sm:-top-10">
-              {trailers.slice(0, 10).map((trailer, index) => {
+              {trailers.slice(0, 5).map((trailer, index) => {
                 const videoSrc = `https://www.youtube.com/watch?v=${trailer.key}`;
                 return (
                   <div key={index} className="px-5 my-10 sm:px-20">
@@ -112,11 +121,18 @@ const Detail = () => {
               })}
             </div>
           )}
-          <div className="px-5 -top-40 sm:-top-10 sm:px-20">
+          <div
+            className="px-5 -top-40 sm:-top-10 sm:px-20"
+            onClick={() => setItem(null)}
+          >
             <h1 className="relative mb-5 text-xl font-bold">More Like This</h1>
             <MovieList category={category} type="popular" />
           </div>
         </>
+      ) : (
+        <div className="h-screen">
+          <Spinner />
+        </div>
       )}
     </div>
   );
