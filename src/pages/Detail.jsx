@@ -64,7 +64,7 @@ const Detail = () => {
               transition={{ duration: 1 }}
             >
               <h1 className="text-5xl font-bold">{item.title || item.name}</h1>
-              <div className="flex gap-2 mt-5">
+              <div className="flex gap-2 mt-3">
                 {item.genres &&
                   item.genres.slice(0, 5).map((genre) => (
                     <span
@@ -83,7 +83,7 @@ const Detail = () => {
                     item.release_date?.slice(0, 4)}
                 </span>
               </p>
-              <h1 className="mt-5 text-2xl font-bold">Casts</h1>
+              <h1 className="mt-3 text-2xl font-bold">Casts</h1>
               {casts && (
                 <div className="grid grid-cols-3 gap-5 mt-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                   {casts.slice(0, 6).map((cast) => (
