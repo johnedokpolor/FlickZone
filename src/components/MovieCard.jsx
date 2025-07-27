@@ -38,7 +38,9 @@ const MovieCard = ({ item, category }) => {
         </motion.div>
       </div>
       <p className="pt-2 font-semibold group-hover:text-red-600">
-        {item.title.length > 20 ? item.title?.slice(0, 20) + "..." : item.title}
+        {item.title?.length > 20
+          ? item.title?.slice(0, 20) + "..."
+          : item.title}
       </p>
     </Link>
   );
