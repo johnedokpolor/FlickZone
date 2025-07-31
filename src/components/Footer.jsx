@@ -61,6 +61,14 @@ const Footer = () => {
             </p>
           </div>
         </div>
+        <div className="mt-5 border-t text-center">
+          <p className="mt-5 pb-3">
+            &copy;2025 FlickZone, All Rights Reserved.
+          </p>
+          <p>
+            &copy;2025 - {new Date().getFullYear()} Made with 💓 by VybeCoder.
+          </p>
+        </div>
       </div>
     </div>
   );
