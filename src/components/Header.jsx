@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Context } from "../context/context";
-import { FaMoon, FaSun, FaSearch } from "react-icons/fa";
+import { FaMoon, FaSun, FaSearch, FaHome } from "react-icons/fa";
 import { motion } from "motion/react";
 
 const headerNav = [
@@ -38,7 +38,6 @@ const Header = () => {
   const { dark, setDark } = useContext(Context);
   return (
     <nav
-      // className="z-50 w-screen px-10 py-4 text-white sm:fixed sm:top-0 sm:flex sm:justify-between"
       className={`fixed z-50 w-screen px-10 py-3 text-white sm:fixed sm:top-0 sm:flex sm:justify-between sm:py-4 ${scrolled ? "bg-black" : ""}`}
     >
       <motion.div
@@ -52,8 +51,7 @@ const Header = () => {
           transition: { duration: 1 },
         }}
       >
-        {/* <FaMoon className="inline" onClick={() => setDark(!dark)} /> */}
-        <h1 className="text-2xl text-center">FlickZone </h1>
+        <h1 className="text-center text-2xl">FlickZone </h1>
       </motion.div>
 
       <motion.div
@@ -77,11 +75,7 @@ const Header = () => {
               }}
             >
               <Link
-                className={
-                  item === active
-                    ? "border-b-2 border-red-600 pb-1 text-lg transition duration-500 hover:text-red-600"
-                    : "text-lg hover:text-red-600"
-                }
+                className={`text-lg hover:text-red-600 ${item === active && "border-b-2 border-red-600 pb-1"}`}
                 to={item.path}
               >
                 {item.display}
@@ -100,7 +94,7 @@ const Header = () => {
           y: 0,
           transition: { duration: 1 },
         }}
-        className="fixed bottom-0 left-0 z-50 flex justify-between w-full px-5 py-3 bg-black sm:hidden sm:gap-6"
+        className="fixed bottom-0 left-0 z-50 flex w-full justify-between bg-black px-5 py-3 sm:hidden sm:gap-6"
       >
         {headerNav.map((item, i) => {
           return (
@@ -111,11 +105,7 @@ const Header = () => {
               }}
             >
               <Link
-                className={
-                  item === active
-                    ? "border-b-2 border-red-600 pb-1 text-lg transition duration-500 hover:text-red-600"
-                    : "text-lg hover:text-red-600"
-                }
+                className={`text-lg hover:text-red-600 ${item === active && "border-b-2 border-red-600 pb-1"}`}
                 to={item.path}
               >
                 {item.display}

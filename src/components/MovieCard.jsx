@@ -18,10 +18,10 @@ const MovieCard = ({ item, category }) => {
   return (
     <Link className="group" to={`/${category}/${item.id}`}>
       <div
-        className="relative flex items-center justify-center h-72 w-44 rounded-3xl"
+        className="md:w-42 relative flex h-72 w-40 items-center justify-center rounded-3xl"
         style={BgImage}
       >
-        <div className="absolute hidden w-full h-full bg-black/60 group-hover:block"></div>
+        <div className="absolute hidden h-full w-full bg-black/60 group-hover:block"></div>
         <motion.div
           initial={{
             scale: 0,
@@ -32,15 +32,18 @@ const MovieCard = ({ item, category }) => {
               duration: 0.3,
             },
           }}
-          className="z-50 hidden py-3 bg-red-600 rounded-full shadow-sm px-7 shadow-red-500 group-hover:block"
+          className="z-50 hidden rounded-full bg-red-600 px-7 py-3 shadow-sm shadow-red-500 group-hover:block"
         >
           <FaPlay className="text-[10px]" />
         </motion.div>
       </div>
       <p className="pt-2 font-semibold group-hover:text-red-600">
-        {item.title?.length > 20
+        {(item.title?.length > 20
           ? item.title?.slice(0, 20) + "..."
-          : item.title}
+          : item.title) ||
+          (item.name?.length > 20
+            ? item.name?.slice(0, 20) + "..."
+            : item.name)}
       </p>
     </Link>
   );
