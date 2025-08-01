@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import fetchFromApi from "../api/fetchFromApi";
-import { Swiper, SwiperSlide } from "swiper/react";
 import Spinner from "./Spinner";
-import "swiper/css";
 import { MovieData } from "../assets/assets";
 import HeroSlideItem from "./HeroSlideItem";
 import { Context } from "../context/context";
