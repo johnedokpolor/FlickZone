@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import fetchFromApi from "../api/fetchFromApi";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect } from "react";
 import { Context } from "../context/context";
 
