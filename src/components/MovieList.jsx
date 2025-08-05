@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react";
 import fetchFromApi from "../api/fetchFromApi";
 import { useEffect } from "react";
 import { Context } from "../context/context";
-
-import "swiper/css";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ category, type }) => {
